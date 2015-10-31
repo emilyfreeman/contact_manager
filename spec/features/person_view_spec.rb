@@ -7,6 +7,7 @@ describe 'the person view', type: :feature do
   before(:each) do
     person.phone_numbers.create(number: "555-1234")
     person.phone_numbers.create(number: "555-5678")
+    person.email_addresses.create(address: "awesome@superawesome.com")
     visit person_path(person)
   end
 
@@ -16,9 +17,21 @@ describe 'the person view', type: :feature do
     end
   end
 
+  it 'has a link to delete an email address' do
+    person.email_addresses.each do |address|
+      expect(page).to have_link('delete', href: email_address_path(address))
+    end
+  end
+
   it 'has links to edit phone numbers' do
     person.phone_numbers.each do |phone|
       expect(page).to have_link('edit', href: edit_phone_number_path(phone))
+    end
+  end
+
+  it 'has links to edit email addresses' do
+    person.email_addresses.each do |address|
+      expect(page).to have_link('edit', href: edit_email_address_path(address))
     end
   end
 
