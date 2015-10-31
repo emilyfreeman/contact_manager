@@ -54,11 +54,8 @@ describe 'the person view', type: :feature do
   end
 
   it 'deletes a phone number' do
-    phone = person.phone_numbers.first
-    old_number = phone.number
-
-    first(:link, 'delete').click
-      expect(page).to_not have_content("555-1234")
+    find('.number-display:first').click_link('delete')
+    expect(page).to_not have_content("555-5678")
   end
 
 
