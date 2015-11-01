@@ -1,9 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<ul>
+  <% @company.phone_numbers.each do |phone| %>
+  <li class="number-display">
+
+    <%= phone.number %> <%= link_to('edit', edit_phone_number_path(phone)) %> <%= link_to('delete', phone_number_path(phone)) %>
+  </li>
+  <% end %>
+</ul>
+
 <p>
   <strong>Name:</strong>
   <%= @company.name %>
 </p>
 
+<%= link_to 'Add phone number', new_phone_number_path(contact_id: @company.id, contact_type: 'company') %> |
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>
